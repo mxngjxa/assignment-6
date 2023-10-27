@@ -52,24 +52,93 @@ export function App() {
     },
   ];
 
-  const initialState = {
+  const initialStateG = {
     glassSliderSelection: 0,
     glassFeatureSelection: glassFeatures[0].id,
   };
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state_g, dispatch_g] = useReducer(reducer, initialStateG);
 
   const glassFeatureOptions = glassFeatures.map((content, index) => (
     <FeatureSelector
       key={index}
       content={content}
-      selectedId={state.glassFeatureSelection}
+      selectedId={state_g.glassFeatureSelection}
+      dispatch={dispatch_g}
+    />
+  ));
+
+  const standCarousel = [
+    {
+      description: "Three versatile options to best suit your studio",
+      imageAlt: "Side view of all three stand options.",
+      imageSrc:
+        "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/stand-mount-gallery-1-202203?wid=320&hei=264&fmt=p-jpg&qlt=95&.v=1645726292730",
+    },
+    {
+      description: "Tilt-adjustable stand offers 30 degrees of tilt.",
+      imageAlt: "Back and side view of tilt-adjustable display and stand.",
+      imageSrc:
+        "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/studio-display-gallery-2-202203?wid=320&hei=264&fmt=p-jpg&qlt=95&.v=1675709041798",
+    },
+    {
+      description:
+        "Tilt- and height-adjustable stand option adds 105 mm of height adjustability.",
+      imageAlt:
+        "Back and side view of tilt- and height-adjustable display and stand.",
+      imageSrc:
+        "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/stand-mount-gallery-3-202203?wid=320&hei=264&fmt=p-jpg&qlt=95&.v=1645726292791",
+    },
+    {
+      description:
+        "VESA mount adapter option attaches to a wall or desk mount, stand, or articulating arm and supports landscape and portrait orientation.",
+      imageAlt: "Back and side view of display with VESA mount.",
+      imageSrc:
+        "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/stand-mount-gallery-4-202203?wid=320&hei=264&fmt=p-jpg&qlt=95&.v=1645726292947",
+    },
+  ];
+  const standFeatures = [
+    {
+      id: "stand_1",
+      type: "stand",
+      title: "Tilt-adjustable stand",
+      price: "From $1599",
+      monthlyPrice: "or $133.25/mo. for 12 mo.*",
+    },
+    {
+      id: "stand_2",
+      type: "stand",
+      title: "Tilt- and height-adjustable stand",
+      price: "From $1999",
+      monthlyPrice: "or $158.25/mo. for 12 mo.*",
+    },
+    {
+      id: "stand_0",
+      type: "stand",
+      title: "VESA mount adapter",
+      price: "From $1599",
+      monthlyPrice: "or $133.25/mo. for 12 mo.*",
+    },
+  ];
+
+  const initialStateS = {
+    standSliderSelection: 0,
+    standFeatureSelection: glassFeatures[0].id,
+  };
+
+  const [state_s, dispatch] = useReducer(reducer, initialStateS);
+
+  const standFeatureOptions = standFeatures.map((content, index) => (
+    <FeatureSelector
+      key={index}
+      content={content}
+      selectedId={state_s.standFeatureSelection}
       dispatch={dispatch}
     />
   ));
 
   return (
-    <>
+    <script>
       <div className="bg-slate-200 text-center py-2 mb-4">
         Mimicking Apple&apos;s{" "}
         <a
@@ -109,10 +178,23 @@ export function App() {
               light sources.
             </div>
             <div className="flex flex-col gap-4">{glassFeatureOptions}</div>
+            <div className="w-full md:w-5/12 ">
+              <FeatureCarousel content={standCarousel} />
+            </div>
+            <div className="w-full md:w-7/12 md:pl-12">
+              <h2 className="font-bold mb-4">Stand</h2>
+              <div className="text-sm rounded-xl bg-slate-50 p-4 mb-4">
+                <span className="font-bold">
+                  Pick the stand that&apos;s right for you.
+                </span>{" "}
+                Studio Display comes with your choice of two stands or a mount
+                adapter to fit any setup.
+              </div>
+              <div className="flex flex-col gap-4">{standFeatureOptions}</div>
+            </div>
           </div>
         </div>
       </div>
-      <div className="mt-52"></div>
-    </>
+    </script>
   );
 }
